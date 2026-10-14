@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vince Edward B. Lacson</title>
+  <meta name="description" content="Let's connect!">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --card: #f7f8fa;
+      --text: #1a1a1a;
+      --muted: #666b73;
+      --accent: #2563eb;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 32px 20px;
+    }
+    .card {
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+    .avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-size: 32px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 8px auto 20px;
+    }
+    h1 { font-size: 24px; font-weight: 700; }
+    .bio { color: var(--muted); margin-top: 8px; font-size: 16px; }
+    .links { margin-top: 32px; display: flex; flex-direction: column; gap: 12px; }
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 15px 18px;
+      border-radius: 14px;
+      background: var(--card);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 500;
+      border: 1px solid #e5e7eb;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .btn small { display: block; color: var(--muted); font-weight: 400; font-size: 13px; margin-top: 2px; }
+    .btn.primary small { color: #dbe7ff; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="avatar" aria-hidden="true">VL</div>
+    <h1>Vince Edward B. Lacson</h1>
+    <p class="bio">Let's connect!</p>
+
+    <div class="links">
+      <button class="btn primary" id="saveContact" type="button">Save Contact</button>
+
+      <a class="btn" href="tel:+639957680478">
+        Call
+        <small>+63 9957680478</small>
+      </a>
+
+      <a class="btn" href="mailto:vincelacson1101@gmail.com">
+        Email
+        <small>vincelacson1101@gmail.com</small>
+      </a>
+
+      <a class="btn" href="https://www.facebook.com/VinceLacson.20" target="_blank" rel="noopener">
+        Facebook
+      </a>
+
+      <a class="btn" href="https://vincelacson.netlify.app" target="_blank" rel="noopener">
+        Website
+        <small>vincelacson.netlify.app</small>
+      </a>
+    </div>
+  </main>
+
+  <script>
+    // Save Contact: builds a .vcf file from the details above
+    document.getElementById("saveContact").addEventListener("click", function () {
+      var vcard = [
+        "BEGIN:VCARD",
+        "VERSION:3.0",
+        "N:Lacson;Vince Edward B.;;;",
+        "FN:Vince Edward B. Lacson",
+        "TEL;TYPE=CELL:+639957680478",
+        "EMAIL:vincelacson1101@gmail.com",
+        "URL:https://vincelacson.netlify.app",
+        "URL:https://www.facebook.com/VinceLacson.20",
+        "NOTE:Let's connect!",
+        "END:VCARD"
+      ].join("\r\n");
+
+      var blob = new Blob([vcard], { type: "text/vcard" });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url;
+      a.download = "Vince-Lacson.vcf";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+  </script>
+</body>
+</html>
